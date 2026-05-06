@@ -872,6 +872,8 @@ a{text-decoration:none;color:inherit;}
   .schedule-header{flex-direction:column;gap:12px;}
   .schedule-header>div:last-child{flex-wrap:wrap;gap:8px;}
   .prog-stats{grid-template-columns:1fr 1fr!important;}
+  #prog-indicators-grid{grid-template-columns:1fr 1fr!important;}
+  #prog-info-adicional{grid-template-columns:1fr!important;}
   .ciclos-grid{grid-template-columns:repeat(3,1fr)!important;}
   .wl-header{flex-direction:column;gap:14px;}
   .add-course-grid{grid-template-columns:1fr!important;}
@@ -880,6 +882,7 @@ a{text-decoration:none;color:inherit;}
 }
 @media (max-width:480px){
   .courses-grid{grid-template-columns:1fr!important;}
+  #prog-indicators-grid{grid-template-columns:1fr!important;}
   .wizard-hero-title{font-size:17px;}
 }
 
@@ -1222,9 +1225,9 @@ a{text-decoration:none;color:inherit;}
     <div class="logo-text">Matrícula<span>Inteligente · 2025-I</span></div>
   </div>
   <div class="sidebar-user">
-    <div class="user-ava">SK</div>
+    <div class="user-ava">GT</div>
     <div class="user-info">
-      <div class="name">Sofía Kami</div>
+      <div class="name">Gino Alexander Telles Gonzales</div>
       <div class="code">U202118745 · Com. y Marketing</div>
     </div>
   </div>
@@ -1271,7 +1274,7 @@ a{text-decoration:none;color:inherit;}
     <div class="wizard-wrap">
       <!-- Hero -->
       <div class="wizard-hero">
-        <div class="wizard-hero-title">Tu horario <span class="accent">ideal</span>,<br>generado por IA</div>
+        <div class="wizard-hero-title">Tu horario <span class="accent">ideal</span>,<br>Gino — generado por IA</div>
         <div class="wizard-hero-sub">Responde estas preguntas y el sistema creará el mejor horario posible respetando tus restricciones.</div>
         <div class="wizard-steps-indicator" id="wizard-steps-ui">
           <div class="ws-step active" id="wsi-0"><div class="ws-dot">1</div> Cursos</div>
@@ -1701,9 +1704,10 @@ a{text-decoration:none;color:inherit;}
   <!-- PROGRESS PANEL -->
   <div class="panel" id="panel-progress">
     <div class="progress-wrap">
+      <!-- HERO BANNER -->
       <div class="prog-hero">
         <div class="prog-hero-text">
-          <h2>¡Vas al 70%, Sofía! 🎉</h2>
+          <h2>¡Vas al 70%, Gino! 🎉</h2>
           <p>Llevas 126 créditos aprobados de 180 requeridos</p>
           <div style="margin-top:16px;">
             <div style="font-size:10.5px;color:rgba(255,255,255,0.4);margin-bottom:4px;">Avance de carrera</div>
@@ -1722,32 +1726,168 @@ a{text-decoration:none;color:inherit;}
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:900;font-family:'Sora',sans-serif;">70%</div>
         </div>
       </div>
-      <div class="prog-stats">
-        <div class="prog-stat-card">
-          <div class="label">Créditos aprobados</div>
-          <div class="value">126</div>
-          <div class="sub">de 180 requeridos</div>
-          <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:0" id="pb1"></div></div>
+
+      <!-- ═══════════════════════════════════════════════════════
+           NEW ACADEMIC PROGRESS DASHBOARD (SaaS-style)
+      ═══════════════════════════════════════════════════════ -->
+      <div id="acad-progress-dashboard">
+
+        <!-- Section label -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div>
+            <div style="font-family:'Sora',sans-serif;font-size:15px;font-weight:800;color:var(--gray-800);">📊 Indicadores de Progreso Académico</div>
+            <div style="font-size:11.5px;color:var(--gray-500);margin-top:2px;">Actualizado en tiempo real con tu matrícula</div>
+          </div>
+          <span style="font-size:11px;background:var(--green-bg);color:var(--green);padding:4px 10px;border-radius:20px;font-weight:700;border:1px solid #A7F3D0;">● En vivo</span>
         </div>
-        <div class="prog-stat-card">
-          <div class="label">Ciclos completados</div>
-          <div class="value">7</div>
-          <div class="sub">de 10 ciclos</div>
-          <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:0" id="pb2"></div></div>
+
+        <!-- 4 progress indicator cards grid -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;" id="prog-indicators-grid">
+
+          <!-- Card 1: Créditos Obligatorios -->
+          <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);padding:20px 16px;border:1px solid var(--gray-100);position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--red-light));border-radius:var(--r) var(--r) 0 0;"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+              <span style="font-size:16px;">📚</span>
+              <span style="font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.06em;">Créditos Obligatorios</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative;">
+              <svg width="90" height="90" viewBox="0 0 90 90">
+                <circle cx="45" cy="45" r="38" fill="none" stroke="#F3F4F6" stroke-width="7"/>
+                <circle cx="45" cy="45" r="38" fill="none" stroke="var(--red)" stroke-width="7"
+                  stroke-dasharray="238.76" id="prog-oblig-arc"
+                  stroke-dashoffset="238.76"
+                  stroke-linecap="round" style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.2s ease;"/>
+              </svg>
+              <div style="position:absolute;text-align:center;">
+                <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:900;color:var(--gray-800);" id="prog-oblig-pct">74%</div>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:var(--red);font-family:'Sora',sans-serif;" id="prog-oblig-val">126</div>
+              <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px;">de 170 créditos requeridos</div>
+              <div style="font-size:10px;font-weight:700;margin-top:6px;padding:3px 8px;border-radius:10px;display:inline-block;" id="prog-oblig-badge" style="background:var(--orange-bg);color:var(--orange);">44 pendientes</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Créditos Electivos -->
+          <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);padding:20px 16px;border:1px solid var(--gray-100);position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),#A78BFA);border-radius:var(--r) var(--r) 0 0;"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+              <span style="font-size:16px;">🎓</span>
+              <span style="font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.06em;">Créditos Electivos</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative;">
+              <svg width="90" height="90" viewBox="0 0 90 90">
+                <circle cx="45" cy="45" r="38" fill="none" stroke="#F3F4F6" stroke-width="7"/>
+                <circle cx="45" cy="45" r="38" fill="none" stroke="var(--purple)" stroke-width="7"
+                  stroke-dasharray="238.76" id="prog-elec-arc"
+                  stroke-dashoffset="238.76"
+                  stroke-linecap="round" style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.2s ease;"/>
+              </svg>
+              <div style="position:absolute;text-align:center;">
+                <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:900;color:var(--gray-800);" id="prog-elec-pct">53%</div>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:var(--purple);font-family:'Sora',sans-serif;" id="prog-elec-val">16</div>
+              <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px;">mín. 30 créditos requeridos</div>
+              <div style="font-size:10px;font-weight:700;margin-top:6px;padding:3px 8px;border-radius:10px;display:inline-block;" id="prog-elec-badge">14 pendientes</div>
+            </div>
+          </div>
+
+          <!-- Card 3: Nivel de Inglés -->
+          <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);padding:20px 16px;border:1px solid var(--gray-100);position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),#60A5FA);border-radius:var(--r) var(--r) 0 0;"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+              <span style="font-size:16px;">🗣️</span>
+              <span style="font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.06em;">Nivel de Inglés</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative;">
+              <svg width="90" height="90" viewBox="0 0 90 90">
+                <circle cx="45" cy="45" r="38" fill="none" stroke="#F3F4F6" stroke-width="7"/>
+                <circle cx="45" cy="45" r="38" fill="none" stroke="var(--blue)" stroke-width="7"
+                  stroke-dasharray="238.76" id="prog-eng-arc"
+                  stroke-dashoffset="238.76"
+                  stroke-linecap="round" style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.2s ease;"/>
+              </svg>
+              <div style="position:absolute;text-align:center;">
+                <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:900;color:var(--gray-800);" id="prog-eng-pct">4/5</div>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <div style="display:flex;justify-content:center;gap:4px;margin-bottom:6px;" id="prog-eng-dots">
+                <!-- filled dynamically -->
+              </div>
+              <div style="font-size:10.5px;color:var(--gray-500);">Nivel actual <span id="prog-eng-cur" style="font-weight:700;color:var(--blue);">4</span> / Requerido <strong>5</strong></div>
+              <div style="font-size:10px;font-weight:700;margin-top:6px;padding:3px 8px;border-radius:10px;display:inline-block;" id="prog-eng-badge">1 nivel pendiente</div>
+            </div>
+          </div>
+
+          <!-- Card 4: Prácticas Preprofesionales -->
+          <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);padding:20px 16px;border:1px solid var(--gray-100);position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),#34D399);border-radius:var(--r) var(--r) 0 0;"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;">
+              <span style="font-size:16px;">🏢</span>
+              <span style="font-size:11px;font-weight:700;color:var(--gray-600);text-transform:uppercase;letter-spacing:.06em;">Prácticas Preprofesionales</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative;">
+              <svg width="90" height="90" viewBox="0 0 90 90">
+                <circle cx="45" cy="45" r="38" fill="none" stroke="#F3F4F6" stroke-width="7"/>
+                <circle cx="45" cy="45" r="38" fill="none" stroke="var(--green)" stroke-width="7"
+                  stroke-dasharray="238.76" id="prog-prac-arc"
+                  stroke-dashoffset="238.76"
+                  stroke-linecap="round" style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.2s ease;"/>
+              </svg>
+              <div style="position:absolute;text-align:center;">
+                <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:900;color:var(--gray-800);" id="prog-prac-pct">0%</div>
+              </div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:var(--green);font-family:'Sora',sans-serif;" id="prog-prac-val">0</div>
+              <div style="font-size:10.5px;color:var(--gray-500);margin-top:2px;">de 4 créditos requeridos</div>
+              <div style="font-size:10px;font-weight:700;margin-top:6px;padding:3px 8px;border-radius:10px;background:#FEF2F2;color:#B91C1C;display:inline-block;" id="prog-prac-badge">Pendiente</div>
+            </div>
+          </div>
+
+        </div><!-- end prog-indicators-grid -->
+
+        <!-- Información adicional section -->
+        <div style="background:white;border-radius:var(--r);box-shadow:var(--shadow-sm);padding:20px 22px;border:1px solid var(--gray-100);margin-bottom:22px;">
+          <div style="font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:var(--gray-800);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+            <span>📋</span> Información adicional
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;" id="prog-info-adicional">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-50);border-radius:var(--r-sm);">
+              <span style="font-size:12px;color:var(--gray-600);">Total créditos aprobados</span>
+              <span style="font-size:14px;font-weight:900;color:var(--gray-800);font-family:'Sora',sans-serif;" id="info-total-aprobados">126</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-50);border-radius:var(--r-sm);">
+              <span style="font-size:12px;color:var(--gray-600);">Créditos obligatorios pendientes</span>
+              <span style="font-size:14px;font-weight:900;color:var(--red);font-family:'Sora',sans-serif;" id="info-oblig-pendientes">44</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-50);border-radius:var(--r-sm);">
+              <span style="font-size:12px;color:var(--gray-600);">Créditos electivos pendientes (mín.)</span>
+              <span style="font-size:14px;font-weight:900;color:var(--purple);font-family:'Sora',sans-serif;" id="info-elec-pendientes">14</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-50);border-radius:var(--r-sm);">
+              <span style="font-size:12px;color:var(--gray-600);">Estado nivel de inglés</span>
+              <span style="font-size:12px;font-weight:700;color:var(--blue);font-family:'Sora',sans-serif;" id="info-eng-estado">Nivel 4 — Falta 1</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-50);border-radius:var(--r-sm);">
+              <span style="font-size:12px;color:var(--gray-600);">Créditos de prácticas pendientes</span>
+              <span style="font-size:14px;font-weight:900;color:var(--orange);font-family:'Sora',sans-serif;" id="info-prac-pendientes">4</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--gray-50);border-radius:var(--r-sm);">
+              <span style="font-size:12px;color:var(--gray-600);">Promedio acumulado</span>
+              <span style="font-size:14px;font-weight:900;color:var(--green);font-family:'Sora',sans-serif;">15.4</span>
+            </div>
+          </div>
         </div>
-        <div class="prog-stat-card">
-          <div class="label">Promedio acumulado</div>
-          <div class="value">15.4</div>
-          <div class="sub">Escala vigesimal</div>
-          <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:0;background:var(--green)" id="pb3"></div></div>
-        </div>
-        <div class="prog-stat-card">
-          <div class="label">Cursos pendientes</div>
-          <div class="value">18</div>
-          <div class="sub">aprox. 3 ciclos</div>
-          <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:0;background:var(--orange)" id="pb4"></div></div>
-        </div>
-      </div>
+
+      </div><!-- end acad-progress-dashboard -->
+
+      <!-- Ciclos del Plan de Estudios -->
       <div class="page-header"><div class="page-title" style="font-size:15px;">Ciclos del Plan de Estudios</div></div>
       <div class="ciclos-grid" id="ciclos-grid"></div>
     </div>
@@ -2272,7 +2412,7 @@ function toggleCourse(id,skipLimit){
   const i=S.courses.indexOf(id);
   if(i>=0){S.courses.splice(i,1);}
   else{if(!skipLimit&&getTotalCredits([id])>MAX_CR){openCreditModal(id);return;}S.courses.push(id);}
-  refreshCourseUI();updateCrCount();updateCircularProgress();if(S.schedule)liveRecalc();
+  refreshCourseUI();updateCrCount();updateCircularProgress();updateAcademicProgressDashboard();if(S.schedule)liveRecalc();
 }
 function refreshCourseUI(){
   qsa('#course-grid .course-tile').forEach(t=>{
@@ -2409,7 +2549,7 @@ function addMencionCourse(dynId,menId,btn){
   registerMencionCourses(menId);const c=S.MENCION_REGISTRY[dynId];if(!c){toast('Error','⚠️');return;}
   if(S.courses.includes(dynId)){S.courses.splice(S.courses.indexOf(dynId),1);if(btn){btn.textContent='+ Agregar';btn.classList.remove('added');}const row=btn?.closest('div[style]');if(row){row.style.background='var(--gray-50)';row.style.border='1px solid var(--gray-200)';}}
   else{if(getTotalCredits([dynId])>MAX_CR){openCreditModal(dynId);return;}S.courses.push(dynId);if(btn){btn.textContent='✓ Agregado';btn.classList.add('added');}const row=btn?.closest('div[style]');if(row){row.style.background='var(--green-bg)';row.style.border='1px solid #A7F3D0';}}
-  updateCrCount();updateCircularProgress();if(S.schedule)liveRecalc();
+  updateCrCount();updateCircularProgress();updateAcademicProgressDashboard();if(S.schedule)liveRecalc();
   toast(S.courses.includes(dynId)?`"${c.name}" agregado`:`"${c.name}" eliminado`,'✅');
 }
 function addAllMencionCourses(menId){
@@ -2417,7 +2557,7 @@ function addAllMencionCourses(menId){
   const addCr=ids.reduce((s,id)=>{const c=S.MENCION_REGISTRY[id];return s+(c?c.credits:0);},0);
   if(getTotalCredits()+addCr>MAX_CR){toast('Excede el límite. Agrega individualmente.','⚠️');return;}
   ids.forEach(id=>{if(!S.courses.includes(id))S.courses.push(id);});
-  showMencionCourses(menId);updateCrCount();updateCircularProgress();
+  showMencionCourses(menId);updateCrCount();updateCircularProgress();updateAcademicProgressDashboard();
   toast('Cursos de la mención agregados ✅','✅');if(S.schedule)liveRecalc();
 }
 
@@ -2445,7 +2585,7 @@ function applyCredit(){
   if(getTotalCredits()-freed+(pc?.credits||0)>MAX_CR){toast('Necesitas liberar más créditos','⚠️');return;}
   S._swapTargets.forEach(({id,isCrs})=>{if(isCrs){const i=S.courseraIds.indexOf(id);if(i>=0)S.courseraIds.splice(i,1);}else{const i=S.courses.indexOf(id);if(i>=0)S.courses.splice(i,1);}});
   if(pa.isCrs)S.courseraIds.push(pa.id);else toggleCourse(pa.id,true);
-  closeCreditModal();refreshCourseUI();buildCourseraList();updateCrCount();updateCircularProgress();
+  closeCreditModal();refreshCourseUI();buildCourseraList();updateCrCount();updateCircularProgress();updateAcademicProgressDashboard();
   toast(`"${pc?.name}" agregado`,'✅');if(S.schedule)liveRecalc();
 }
 
@@ -2605,6 +2745,80 @@ function explainEngine(A){
   return parts.join(' ');
 }
 
+/* ══════ ENGLISH PATTERN VALIDATION ════════════════════════════ */
+function validateEnglishPatterns(){
+  const hasEnglish=S.courses.some(id=>REGULAR_COURSES.find(c=>c.id===id&&c.isEnglish));
+  if(!hasEnglish)return null; // no English course selected → no conflict
+  // ENG_PATS = [{days:['Lun','Mié','Vie'],...},{days:['Mar','Jue','Sáb'],...}]
+  const validPatterns=ENG_PATS.filter(p=>p.days.every(d=>!S.freeDays.includes(d)));
+  if(validPatterns.length>0)return null; // at least one valid pattern exists
+  // Build conflict explanation
+  const conflictDetails=ENG_PATS.map(p=>{
+    const blocked=p.days.filter(d=>S.freeDays.includes(d));
+    return `<li><strong>${p.label}</strong> (${p.days.join('–')}): bloqueado por <span style="color:#B91C1C;font-weight:700;">${blocked.map(d=>({Lun:'Lunes',Mar:'Martes',Mié:'Miércoles',Jue:'Jueves',Vie:'Viernes',Sáb:'Sábado'}[d]||d)).join(', ')}</span> libre</li>`;
+  }).join('');
+  showEnglishConflictModal(conflictDetails);
+  return 'english_conflict';
+}
+
+function showEnglishConflictModal(conflictDetails){
+  // Remove existing modal if any
+  const existing=qs('#eng-conflict-modal');if(existing)existing.remove();
+  const modal=document.createElement('div');
+  modal.id='eng-conflict-modal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(10,22,40,.7);z-index:800;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);';
+  modal.innerHTML=`
+    <div style="background:white;border-radius:18px;width:520px;max-width:94vw;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;animation:slideUp .25s ease;">
+      <div style="background:linear-gradient(135deg,#FEF2F2,#FFF5F5);padding:22px 24px 16px;border-bottom:1px solid #FECACA;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <span style="font-size:24px;">🚫</span>
+          <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:800;color:#B91C1C;">Conflicto con curso de inglés</div>
+        </div>
+        <div style="font-size:12.5px;color:#DC2626;line-height:1.5;">No es posible generar un horario con el curso de inglés y los días libres seleccionados. Intenta modificar tus preferencias.</div>
+      </div>
+      <div style="padding:20px 24px;">
+        <div style="font-size:13px;font-weight:700;color:var(--gray-800);margin-bottom:10px;">¿Por qué ocurre este conflicto?</div>
+        <div style="font-size:12px;color:var(--gray-600);background:var(--gray-50);border-radius:var(--r-sm);padding:14px;margin-bottom:14px;">
+          <p style="margin-bottom:8px;">El inglés solo puede programarse en <strong>patrones interdiarios fijos</strong>:</p>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">${conflictDetails}</ul>
+          <p style="margin-top:10px;font-size:11px;color:var(--gray-500);">Ambos patrones están bloqueados por tus días libres seleccionados.</p>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--gray-800);margin-bottom:10px;">💡 Posibles soluciones:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--green-bg);border:1px solid #A7F3D0;border-radius:var(--r-sm);cursor:pointer;" onclick="resolveEnglishConflict('remove-free-day')">
+            <span>📅</span><span style="font-size:12px;font-weight:600;color:#065F46;">Eliminar un día libre y reintentar</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--blue-bg);border:1px solid #BFDBFE;border-radius:var(--r-sm);cursor:pointer;" onclick="resolveEnglishConflict('remove-english')">
+            <span>🗣️</span><span style="font-size:12px;font-weight:600;color:#1D4ED8;">Desactivar el curso de inglés por ahora</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--orange-bg);border:1px solid #FDE68A;border-radius:var(--r-sm);cursor:pointer;" onclick="resolveEnglishConflict('close')">
+            <span>✏️</span><span style="font-size:12px;font-weight:600;color:#92400E;">Cerrar y modificar manualmente mis preferencias</span>
+          </div>
+        </div>
+      </div>
+      <div style="padding:14px 24px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end;">
+        <button class="btn btn-secondary" onclick="resolveEnglishConflict('close')">Cerrar</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+function resolveEnglishConflict(action){
+  const modal=qs('#eng-conflict-modal');if(modal)modal.remove();
+  if(action==='remove-free-day'){
+    // Navigate back to step 2 (free days)
+    showPanel('wizard');gotoStep(2);toast('Modifica tus días libres para compatibilizar con inglés','📅');
+  } else if(action==='remove-english'){
+    // Remove english course from selection
+    const engIds=S.courses.filter(id=>REGULAR_COURSES.find(c=>c.id===id&&c.isEnglish));
+    engIds.forEach(id=>{const i=S.courses.indexOf(id);if(i>=0)S.courses.splice(i,1);});
+    refreshCourseUI();updateCrCount();
+    toast('Curso de inglés desactivado. Puedes regenerar el horario.','✅');
+    // Now generate without english
+    doGenerate(false);
+  }
+}
+
 /* ══════ GENERATE ══════════════════════════════════════════════ */
 function doGenerate(optimize,overrides){
   S.avoidMorning=qs('#tog-avoidmorn')?.classList.contains('on')||false;
@@ -2614,6 +2828,8 @@ function doGenerate(optimize,overrides){
   if(!S.load)S.load='media';
   if(!S.turnos.length){toast('Selecciona al menos un turno','⚠️');return;}
   if(!getAllIds().length){toast('Selecciona al menos un curso','⚠️');return;}
+  // ── English pattern hard validation ──────────────────────────
+  if(!overrides&&validateEnglishPatterns()==='english_conflict')return;
   const ec=qs('#error-card');if(ec)ec.classList.remove('show');
   const cur=qs('#step-'+wStep);if(cur)cur.classList.remove('active');
   const gen=qs('#step-gen');if(gen)gen.classList.add('active');
@@ -2857,7 +3073,7 @@ function renderSchedule(){
   qs('#no-schedule-msg').style.display='none';qs('#schedule-content').style.display='block';
   // All advanced panels
   renderSmartAlerts(A);renderAnalytics(A);renderSimulator();renderWhatIf();
-  renderRecommendations(A);renderDiscarded();updateCircularProgress();renderRoadmap();
+  renderRecommendations(A);renderDiscarded();updateCircularProgress();updateAcademicProgressDashboard();renderRoadmap();
 }
 function getDotColor(cc){return({'color-0':'#3B82F6','color-1':'#EC4899','color-2':'#10B981','color-3':'#F59E0B','color-4':'#8B5CF6','color-5':'#F97316','color-6':'#14B8A6','color-7':'#EF4444','color-8':'#6366F1'})[cc]||'#6B7280';}
 function getCourseDays(id){if(!S.schedule)return'';return S.schedule.filter(a=>a.id===id).map(a=>`${DAY_LBL[a.day]||a.day} ${a.start}–${a.end}`).join(' · ');}
@@ -2865,7 +3081,7 @@ function getCourseDays(id){if(!S.schedule)return'';return S.schedule.filter(a=>a
 function removeCourse(id,isVirtual){
   if(isVirtual){const i=S.courseraIds.indexOf(id);if(i>=0)S.courseraIds.splice(i,1);}
   else{const i=S.courses.indexOf(id);if(i>=0)S.courses.splice(i,1);}
-  refreshCourseUI();updateCrCount();updateCircularProgress();
+  refreshCourseUI();updateCrCount();updateCircularProgress();updateAcademicProgressDashboard();
   if(!getAllIds().length){S.schedule=null;qs('#schedule-content').style.display='none';qs('#no-schedule-msg').style.display='';const eb=qs('#sched-edit-bar');if(eb)eb.style.display='none';return;}
   liveRecalc();toast('Curso eliminado ✓','✅');
 }
@@ -3196,6 +3412,89 @@ function buildProgress(){
     <div class="ciclo-dot"></div></div>`).join('');
 }
 
+/* ══════ ACADEMIC PROGRESS DASHBOARD (real-time) ══════════════ */
+// Constants for graduation requirements
+const ACAD = {
+  obligBase: 110,   // already approved mandatory credits (base, before this cycle)
+  obligTotal: 170,  // total required mandatory credits
+  elecBase: 16,     // already approved elective credits (base)
+  elecMin: 30,      // minimum elective credits required
+  engCurrent: 4,    // current English level (base)
+  engRequired: 5,   // required English level
+  pracBase: 0,      // already approved practice credits
+  pracRequired: 4,  // required practice credits
+};
+
+function updateAcademicProgressDashboard(){
+  // ── Mandatory credits (obligatorios) ─────────────────────────
+  const mandCrThisCycle=S.courses.reduce((s,id)=>{
+    const c=REGULAR_COURSES.find(x=>x.id===id&&!x.isEnglish&&!S.MENCION_REGISTRY[id]);
+    return s+(c?c.credits:0);
+  },0);
+  const obligCur=Math.min(ACAD.obligBase+mandCrThisCycle,ACAD.obligTotal);
+  const obligPct=Math.round(obligCur/ACAD.obligTotal*100);
+  setCircleArc('prog-oblig-arc',obligPct/100,238.76);
+  setText('prog-oblig-pct',obligPct+'%');
+  setText('prog-oblig-val',obligCur+'');
+  const obligPend=Math.max(0,ACAD.obligTotal-obligCur);
+  const oblBadgeEl=qs('#prog-oblig-badge');
+  if(oblBadgeEl){oblBadgeEl.textContent=obligPend>0?obligPend+' pendientes':'✓ Completado';
+    oblBadgeEl.style.background=obligPend>0?'#FFFBEB':'#ECFDF5';oblBadgeEl.style.color=obligPend>0?'#92400E':'#065F46';}
+  setText('info-oblig-pendientes',String(obligPend));
+
+  // ── Elective credits ──────────────────────────────────────────
+  const elecCrThisCycle=[...S.courseraIds,...Object.keys(S.MENCION_REGISTRY).filter(id=>S.courses.includes(id))].reduce((s,id)=>{
+    const c=getAllCourse(id);return s+(c?c.credits:0);
+  },0);
+  const elecCur=Math.min(ACAD.elecBase+elecCrThisCycle,ACAD.elecMin+10);// cap display at min+10
+  const elecForPct=Math.min(elecCur,ACAD.elecMin);
+  const elecPct=Math.round(elecForPct/ACAD.elecMin*100);
+  setCircleArc('prog-elec-arc',elecPct/100,238.76);
+  setText('prog-elec-pct',elecPct+'%');
+  setText('prog-elec-val',elecCur+'');
+  const elecPend=Math.max(0,ACAD.elecMin-elecCur);
+  const elBadgeEl=qs('#prog-elec-badge');
+  if(elBadgeEl){elBadgeEl.textContent=elecPend>0?elecPend+' pendientes':'✓ Completado';
+    elBadgeEl.style.background=elecPend>0?'#F5F3FF':'#ECFDF5';elBadgeEl.style.color=elecPend>0?'#6D28D9':'#065F46';}
+  setText('info-elec-pendientes',String(elecPend));
+  setText('info-total-aprobados',String(ACAD.obligBase+mandCrThisCycle+ACAD.elecBase+elecCrThisCycle));
+
+  // ── English level ─────────────────────────────────────────────
+  const hasEnglishSelected=S.courses.some(id=>REGULAR_COURSES.find(c=>c.id===id&&c.isEnglish));
+  const engCur=ACAD.engCurrent+(hasEnglishSelected?1:0);
+  const engPct=Math.min(Math.round(engCur/ACAD.engRequired*100),100);
+  setCircleArc('prog-eng-arc',engPct/100,238.76);
+  setText('prog-eng-pct',engCur+'/'+ACAD.engRequired);
+  setText('prog-eng-cur',String(engCur));
+  // Dots visualization
+  const dotsEl=qs('#prog-eng-dots');
+  if(dotsEl){dotsEl.innerHTML=Array.from({length:ACAD.engRequired},(_,i)=>`<div style="width:14px;height:14px;border-radius:50%;background:${i<engCur?'var(--blue)':'var(--gray-200)'};transition:background .4s ease;"></div>`).join('');}
+  const engPend=Math.max(0,ACAD.engRequired-engCur);
+  const engBadgeEl=qs('#prog-eng-badge');
+  if(engBadgeEl){engBadgeEl.textContent=engPend>0?engPend+' nivel'+(engPend>1?'es':'')+' pendiente'+(engPend>1?'s':''):'✓ Nivel completado';
+    engBadgeEl.style.background=engPend>0?'#EFF6FF':'#ECFDF5';engBadgeEl.style.color=engPend>0?'#1D4ED8':'#065F46';}
+  setText('info-eng-estado','Nivel '+engCur+(engPend>0?' — Falta '+engPend:' ✓'));
+
+  // ── Prácticas Preprofesionales ────────────────────────────────
+  const pracCur=ACAD.pracBase; // base 0, would update if practice course added
+  const pracPct=Math.round(pracCur/ACAD.pracRequired*100);
+  setCircleArc('prog-prac-arc',pracPct/100,238.76);
+  setText('prog-prac-pct',pracPct+'%');
+  setText('prog-prac-val',String(pracCur));
+  const pracPend=Math.max(0,ACAD.pracRequired-pracCur);
+  const pracBadgeEl=qs('#prog-prac-badge');
+  if(pracBadgeEl){pracBadgeEl.textContent=pracPend>0?pracPend+'cr pendientes':'✓ Completado';
+    pracBadgeEl.style.background=pracPend>0?'#FEF2F2':'#ECFDF5';pracBadgeEl.style.color=pracPend>0?'#B91C1C':'#065F46';}
+  setText('info-prac-pendientes',String(pracPend));
+}
+
+function setCircleArc(id,pct,circ){
+  const el=qs('#'+id);if(!el)return;
+  const offset=circ*(1-Math.min(Math.max(pct,0),1));
+  el.style.strokeDashoffset=offset.toFixed(2);
+}
+function setText(id,val){const el=qs('#'+id);if(el)el.textContent=val;}
+
 /* ══════ WAITLIST ══════════════════════════════════════════════ */
 const WL_COURSES=[
   {id:'mkt_adv',icon:'🌐',name:'Marketing Avanzado',section:'Sec. 02',turno:'Tarde · 14:00–16:00',prof:'Mg. Lucia Flores',credits:3},
@@ -3224,7 +3523,7 @@ function acceptWaitlist(){
   if(!REGULAR_COURSES.find(x=>x.id===c.id))REGULAR_COURSES.push(courseObj);
   if(!S.courses.includes(c.id)){if(getTotalCredits([c.id])>MAX_CR){toast('Excedería el límite de créditos','⚠️');return;}S.courses.push(c.id);}
   addAlert({icon:'🎉',title:`¡Cupo aceptado! ${c.name}`,sub:`${c.section} fue agregado a tu horario.`,time:'Ahora',type:'success'});
-  refreshCourseUI();updateCrCount();updateCircularProgress();
+  refreshCourseUI();updateCrCount();updateCircularProgress();updateAcademicProgressDashboard();
   toast(`¡Cupo aceptado! "${c.name}" en tu horario 🎉`,'🎉');
   if(S.schedule)liveRecalc();
   const ch=qs('#wl-chip-1');if(ch){ch.textContent='¡Cupo aceptado!';ch.classList.add('green');}
@@ -3260,7 +3559,7 @@ function showPanel(name){
   const p=qs('#panel-'+name);if(p)p.classList.add('active');const n=qs('#nav-'+name);if(n)n.classList.add('active');
   const bc=qs('#breadcrumb-text');if(bc)bc.textContent=PNLS[name]||name;
   closeSidebar();
-  if(name==='progress'){setTimeout(()=>{[{id:'pb1',w:'70%'},{id:'pb2',w:'70%'},{id:'pb3',w:'77%'},{id:'pb4',w:'30%'}].forEach(({id,w})=>{const e=qs('#'+id);if(e)e.style.width=w;});const h=qs('#prog-bar-hero');if(h)h.style.width='70%';},200);buildProgress();}
+  if(name==='progress'){setTimeout(()=>{const h=qs('#prog-bar-hero');if(h)h.style.width='70%';updateAcademicProgressDashboard();},200);buildProgress();}
   if(name==='waitlist'){setTimeout(()=>{const b=qs('#demand-bar');if(b)b.style.width='62%';},200);}
   if(name==='professors')buildProfGrid(S.profFilter||'all');
   if(name==='schedule'&&S.schedule){renderSchedule();const rs=qs('#regen-strip');if(rs)rs.style.display='flex';}
