@@ -2352,6 +2352,11 @@ function getBestProf(courseId){
 /* ══════ MOBILE SIDEBAR ════════════════════════════════════════ */
 function openSidebar(){qs('.sidebar').classList.add('open');qs('#sidebar-backdrop').classList.add('show');}
 function closeSidebar(){qs('.sidebar').classList.remove('open');qs('#sidebar-backdrop').classList.remove('show');}
+function toggleSidebar(){
+  const sidebar=qs('.sidebar');
+  if(sidebar&&sidebar.classList.contains('open'))closeSidebar();
+  else openSidebar();
+}
 
 /* ══════ WIZARD ════════════════════════════════════════════════ */
 const STEP_ORD=[0,'elec',1,2,3,4];let wStep=0;
@@ -3575,7 +3580,7 @@ document.addEventListener('DOMContentLoaded',function(){
   setTimeout(()=>{const b=qs('#req-demand-bar');if(b)b.style.width='62%';},800);
 
   // Mobile
-  qs('#mob-burger')?.addEventListener('click',openSidebar);
+  qs('#mob-burger')?.addEventListener('click',toggleSidebar);
   qs('#sidebar-backdrop')?.addEventListener('click',closeSidebar);
   qsa('.nav-item').forEach(n=>n.addEventListener('click',()=>{if(window.innerWidth<=768)closeSidebar();}));
 
