@@ -62,14 +62,41 @@ a{text-decoration:none;color:inherit;}
   display:flex;flex-direction:column;
   position:fixed;top:0;left:0;bottom:0;
   z-index:200;
-  transition:transform var(--transition);
+  transition:width .25s cubic-bezier(0.4,0,0.2,1),transform var(--transition);
   overflow:hidden;
 }
+.sidebar-collapsed{width:56px;}
+.sidebar-collapsed .sidebar-logo{padding:20px 0 16px;justify-content:center;gap:0;}
+.sidebar-collapsed .sidebar-logo .logo-mark{display:none;}
+.sidebar-collapsed .logo-text,
+.sidebar-collapsed .user-info,
+.sidebar-collapsed .sidebar-footer,
+.sidebar-collapsed .nav-section-label,
+.sidebar-collapsed .nav-badge{display:none;}
+.sidebar-collapsed .sidebar-user{justify-content:center;padding:16px 0;}
+.sidebar-collapsed .sidebar-nav{padding-left:0;padding-right:0;}
+.sidebar-collapsed .nav-item{
+  justify-content:center;
+  gap:0;
+  padding:9px 0;
+  font-size:0;
+  color:transparent;
+}
+.sidebar-collapsed .nav-item .nav-icon{font-size:17px;width:auto;color:white;}
+.sidebar-collapsed .nav-item.active .nav-icon{color:var(--red-light);}
 .sidebar-logo{
   padding:20px 18px 16px;
-  display:flex;align-items:center;gap:10px;
+  display:flex;align-items:center;
+  justify-content: space-between;
+  gap:10px;
   border-bottom:1px solid rgba(255,255,255,0.07);
 }
+.sidebar-toggle-btn{
+  width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.1);
+  color:white;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background .2s ease,transform .2s ease;
+}
+.sidebar-toggle-btn:hover{background:rgba(255,255,255,.16);transform:translateY(-1px);}
 .logo-mark {
   width: 36px;
   height: 36px;
@@ -138,7 +165,12 @@ a{text-decoration:none;color:inherit;}
   margin-left:var(--sidebar-w);
   flex:1;display:flex;flex-direction:column;min-height:100vh;
   padding-top:0;
+  transition:margin-left .25s cubic-bezier(0.4,0,0.2,1);
 }
+.main-area.sidebar-collapsed-main{margin-left:56px;}
+.sidebar-collapsed .sidebar-logo .sidebar-toggle-btn{margin:0 auto;}
+.sidebar-collapsed .sidebar-logo .logo-text{display:none;}
+.sidebar-collapsed .sidebar-logo .logo-mark{width:30px;height:30px;}
 
 
 /* ── PANELS ── */
@@ -147,9 +179,6 @@ a{text-decoration:none;color:inherit;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── PANEL: WIZARD ── */
-.wizard-wrap{
-  max-width:820px;margin:0 auto;
-}
 .wizard-hero{
   background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
   border-radius:var(--r);padding:32px 36px;
@@ -298,8 +327,8 @@ a{text-decoration:none;color:inherit;}
 }
 .btn-primary{background:var(--red);color:white;box-shadow:var(--shadow-red);}
 .btn-primary:hover{background:var(--red-dark);transform:translateY(-1px);}
-.btn-secondary{background:var(--gray-100);color:var(--gray-700);}
-.btn-secondary:hover{background:var(--gray-200);}
+.btn-secondary{background:var(--gray-200);color:var(--gray-800);}
+.btn-secondary:hover{color:var(--gray--1300);}
 .btn-outline{background:transparent;color:var(--red);border:2px solid var(--red);}
 .btn-outline:hover{background:var(--red-bg);}
 
@@ -334,7 +363,6 @@ a{text-decoration:none;color:inherit;}
 .gen-bar-fill{height:100%;background:var(--red);border-radius:2px;width:0;transition:width 0.4s ease;}
 
 /* ── PANEL: SCHEDULE ── */
-.schedule-wrap{max-width:1100px;}
 .schedule-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;}
 .schedule-title-area .page-title{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;margin-bottom:2px;}
 .schedule-title-area .page-sub{font-size:12.5px;color:var(--gray-500);}
@@ -489,7 +517,6 @@ a{text-decoration:none;color:inherit;}
 }
 
 /* ── PANEL: PROGRESS ── */
-.progress-wrap{max-width:900px;}
 .prog-hero{
   background:linear-gradient(135deg,var(--navy) 0%,#1E3A5F 100%);
   border-radius:var(--r);padding:28px 32px;
@@ -538,7 +565,6 @@ a{text-decoration:none;color:inherit;}
 .ciclo-card.current .ciclo-dot{background:var(--red);}
 
 /* ── PANEL: WAITLIST ── */
-.waitlist-wrap{max-width:700px;}
 .wl-header{
   background:var(--white);border-radius:var(--r);
   padding:22px;box-shadow:var(--shadow-sm);margin-bottom:16px;
@@ -587,6 +613,26 @@ a{text-decoration:none;color:inherit;}
 
 /* ── PANEL: ALERTS ── */
 .alerts-list{display:flex;flex-direction:column;gap:10px;max-width:700px;}
+
+#panel-alerts{width:100%;}
+#panel-alerts .page-header-row{
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+#page-header-flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+#panel-alerts .page-header-row > div{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+#panel-alerts .alerts-list{
+  width:100%;
+  max-width:none;
+}
 .alert-item{
   background:var(--white);border-radius:var(--r);
   padding:16px 20px;box-shadow:var(--shadow-sm);
@@ -669,6 +715,7 @@ a{text-decoration:none;color:inherit;}
 
 /* ── SECTION: new request ── */
 .req-form{
+  width:100%;
   background:var(--white);border-radius:var(--r);
   padding:22px;box-shadow:var(--shadow-sm);
 }
@@ -690,7 +737,7 @@ a{text-decoration:none;color:inherit;}
 .page-header{margin-bottom:24px;}
 .page-header .page-title{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;margin-bottom:2px;}
 .page-header .page-sub{font-size:12.5px;color:var(--gray-500);}
-.page-header-row{display:flex;justify-content:space-between;align-items:flex-end;}
+.page-header-row{display:flex;justify-content:space-around;align-items:center;}
 
 /* ── EMPTY SCHEDULE WARNING ── */
 .empty-schedule{
@@ -855,9 +902,23 @@ a{text-decoration:none;color:inherit;}
 @media (max-width:768px){
   .mob-topbar{display:none;}
   .mob-bar{display:flex;}
+  .sidebar-logo{justify-content:flex-start;}
+  .sidebar-toggle-btn{display:none;}
+  .sidebar-collapsed{width:var(--sidebar-w);}
+  .sidebar-collapsed .logo-text,
+  .sidebar-collapsed .user-info,
+  .sidebar-collapsed .sidebar-footer,
+  .sidebar-collapsed .nav-section-label,
+  .sidebar-collapsed .nav-badge{display:block;}
+  .sidebar-collapsed .sidebar-logo{padding:20px 18px 16px;justify-content:flex-start;gap:10px;}
+  .sidebar-collapsed .sidebar-logo .logo-mark{display:block;}
+  .sidebar-collapsed .sidebar-user{justify-content:flex-start;padding:16px 18px;}
+  .sidebar-collapsed .sidebar-nav{padding-left:10px;padding-right:10px;}
+  .sidebar-collapsed .nav-item{justify-content:flex-start;gap:10px;padding:9px 10px;font-size:12.5px;color:rgba(255,255,255,0.55);}
   .sidebar{top:50px;height:calc(100vh - 50px);transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);}
   .sidebar.open{transform:translateX(0);}
   .main-area{margin-left:0!important;padding-top:52px;}
+  .main-area.sidebar-collapsed-main{margin-left:0;}
   .panel{padding:14px;}
   .wizard-wrap{max-width:100%;}
   .wizard-hero{padding:18px 16px;}
@@ -1227,6 +1288,7 @@ a{text-decoration:none;color:inherit;}
   <div class="sidebar-logo">
     <img src="/img/logo-upc.png" alt="UPC-logo" class="logo-mark">
     <div class="logo-text">Matrícula<span>Inteligente · 2025-I</span></div>
+    <button class="sidebar-toggle-btn" id="desktop-sidebar-toggle" aria-label="Colapsar sidebar">❮</button>
   </div>
   <div class="sidebar-user">
     <div class="user-ava">GT</div>
@@ -1688,7 +1750,7 @@ a{text-decoration:none;color:inherit;}
 
   <!-- PROFESSORS PANEL -->
   <div class="panel" id="panel-professors">
-    <div class="page-header page-header-row">
+    <div id="page-header-flex-start"class="page-header page-header-row">
       <div>
         <div class="page-title">👨‍🏫 Docentes</div>
         <div class="page-sub">Calificaciones, filtros y recomendaciones para tu matrícula</div>
@@ -1939,7 +2001,7 @@ a{text-decoration:none;color:inherit;}
           <div class="wl-chip" id="wl-chip-2">Posición #<span id="wl-p2">7</span></div>
         </div>
       </div>
-      <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-evenly;margin-bottom:20px;">
         <button class="wl-advance-btn" onclick="advanceWaitlist()">⬆️ Simular avance en lista</button>
         <button class="btn btn-secondary" onclick="showPanel('request')">📋 Solicitar nueva sección</button>
       </div>
@@ -1971,12 +2033,12 @@ a{text-decoration:none;color:inherit;}
 
   <!-- REQUEST PANEL -->
   <div class="panel" id="panel-request">
-    <div style="max-width:600px;">
-      <div class="page-header">
+    <div style="width:100%;display:flex;flex-direction:column;align-items:flex-start;">
+      <div class="page-header" style="width:100%;">
         <div class="page-title">📋 Solicitar Nueva Sección</div>
         <div class="page-sub">Registra tu solicitud de apertura de sección adicional</div>
       </div>
-      <div class="req-form">
+      <div class="req-form" style="max-width:1300px;width:100%;">
         <div class="form-row">
           <label class="form-label">Curso</label>
           <select class="form-select" id="req-course">
@@ -2007,7 +2069,9 @@ a{text-decoration:none;color:inherit;}
           <div class="demand-bar-outer"><div class="demand-bar-inner" style="width:62%;" id="req-demand-bar"></div></div>
           <div style="font-size:10.5px;color:var(--gray-500);margin-top:6px;">Alta demanda · La universidad considera abrir nueva sección</div>
         </div>
-        <button class="btn btn-primary" style="margin-top:16px;width:100%;padding:13px;" onclick="submitRequest()">Enviar solicitud →</button>
+        <div style="display:flex;justify-content:center;">
+          <button class="btn btn-primary" style="margin-top:16px;width:100%;max-width:200px;padding:13px;" onclick="submitRequest()">Enviar solicitud →</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2356,6 +2420,53 @@ function toggleSidebar(){
   const sidebar=qs('.sidebar');
   if(sidebar&&sidebar.classList.contains('open'))closeSidebar();
   else openSidebar();
+}
+
+const SIDEBAR_COLLAPSED_KEY='sidebar-collapsed';
+function getNavLabel(item){
+  const clone=item.cloneNode(true);
+  const badge=clone.querySelector('.nav-badge');
+  if(badge)badge.remove();
+  const icon=clone.querySelector('.nav-icon');
+  if(icon)icon.remove();
+  return clone.textContent.replace(/\s+/g,' ').trim();
+}
+function applySidebarCollapsed(collapsed,persist){
+  const sidebar=qs('.sidebar');
+  const main=qs('.main-area');
+  const button=qs('#desktop-sidebar-toggle');
+  if(!sidebar||!main)return;
+  const desktopMode=window.innerWidth>768;
+  const activeCollapsed=desktopMode&&collapsed;
+  sidebar.classList.toggle('sidebar-collapsed',activeCollapsed);
+  main.classList.toggle('sidebar-collapsed-main',activeCollapsed);
+  if(button){
+    button.textContent=activeCollapsed?'❯':'❮';
+    button.setAttribute('aria-label',activeCollapsed?'Expandir sidebar':'Colapsar sidebar');
+  }
+  qsa('.nav-item').forEach(item=>{
+    const label=getNavLabel(item);
+    if(activeCollapsed){
+      item.title=label;
+      item.setAttribute('aria-label',label);
+    }else{
+      item.removeAttribute('title');
+      item.removeAttribute('aria-label');
+    }
+  });
+  if(persist){
+    try{localStorage.setItem(SIDEBAR_COLLAPSED_KEY,activeCollapsed?'1':'0');}catch(e){}
+  }
+}
+function syncSidebarLayout(){
+  let savedCollapsed=false;
+  try{savedCollapsed=localStorage.getItem(SIDEBAR_COLLAPSED_KEY)==='1';}catch(e){}
+  applySidebarCollapsed(window.innerWidth>768?savedCollapsed:false,false);
+}
+function toggleDesktopSidebar(){
+  const sidebar=qs('.sidebar');
+  if(!sidebar)return;
+  applySidebarCollapsed(!sidebar.classList.contains('sidebar-collapsed'),true);
 }
 
 /* ══════ WIZARD ════════════════════════════════════════════════ */
@@ -3579,8 +3690,11 @@ document.addEventListener('DOMContentLoaded',function(){
   buildCourseGrid();buildProfGrid('all');buildAlerts();updateWizUI();
   setTimeout(()=>{const b=qs('#req-demand-bar');if(b)b.style.width='62%';},800);
 
+  syncSidebarLayout();
+
   // Mobile
   qs('#mob-burger')?.addEventListener('click',toggleSidebar);
+  qs('#desktop-sidebar-toggle')?.addEventListener('click',toggleDesktopSidebar);
   qs('#sidebar-backdrop')?.addEventListener('click',closeSidebar);
   qsa('.nav-item').forEach(n=>n.addEventListener('click',()=>{if(window.innerWidth<=768)closeSidebar();}));
 
@@ -3661,6 +3775,8 @@ document.addEventListener('DOMContentLoaded',function(){
   qsa('.load-card').forEach(lc=>{lc.removeAttribute('onclick');lc.addEventListener('click',function(){const l=this.querySelector('.lc-label')?.textContent.trim().toLowerCase()||'';const key=l==='ligera'?'ligera':l==='media'?'media':l==='alta'?'alta':l;if(key)pickLoad(key,this);});});
   const genBtn=qs('#step-4 .btn-primary');if(genBtn){genBtn.removeAttribute('onclick');genBtn.addEventListener('click',()=>doGenerate(false));}
 });
+
+window.addEventListener('resize',syncSidebarLayout);
 
 // ════ ORIGINAL ELECTIVOS DATA ════
 const COURSERA_COURSES = [
